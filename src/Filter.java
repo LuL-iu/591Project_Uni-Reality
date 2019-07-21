@@ -1,11 +1,14 @@
 
 public class Filter {
 
-	
-	public void addFilter (Filter two){
+	public void changePhotoColorTone() {
 		
+		
+	}
 	
-
+	public void PixelGrid() {
+		
+		
 	}
 
 }
