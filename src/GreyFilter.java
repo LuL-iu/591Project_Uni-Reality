@@ -2,11 +2,12 @@ import java.awt.image.BufferedImage;
 
 public class GreyFilter implements Filter {
 	public BufferedImage processImage(BufferedImage img) {
-		int width = img.getWidth();
-		int height = img.getHeight();
+		BufferedImage imgGrey = img;
+		int width = imgGrey.getWidth();
+		int height = imgGrey.getHeight();
 		for(int y = 0; y < height; y++){
 			for(int x = 0; x < width; x++){
-			    int p = img.getRGB(x,y);
+			    int p = imgGrey.getRGB(x,y);
 
 			    int a = (p>>24)&0xff;
 			    int r = (p>>16)&0xff;
@@ -18,9 +19,9 @@ public class GreyFilter implements Filter {
 				//replace RGB value with avg
 				    p = (a<<24) | (avg<<16) | (avg<<8) | avg;
 				
-				    img.setRGB(x, y, p);
+				    imgGrey.setRGB(x, y, p);
 			}
 		}
-		return img;
+		return imgGrey;
 	}
 }

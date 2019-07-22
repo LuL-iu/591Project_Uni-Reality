@@ -1,5 +1,3 @@
-
-
 public class UniReality {
 
 	public static void main(String[] args) {
