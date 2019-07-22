@@ -1,14 +1,7 @@
+import java.awt.image.BufferedImage;
 
-public class Filter {
+public interface Filter {
 
-	public void changePhotoColorTone() {
-		
-		
-	}
-	
-	public void PixelGrid() {
-		
-		
-	}
 
+	public abstract BufferedImage processImage(BufferedImage image);
 }
