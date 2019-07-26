@@ -1,23 +1,48 @@
-/**
- * This Emoji Class contains addEmoji into image library, select emoji in libray and return a image to WindowBuilder
- * @author liulu
- *
- */
-public class Emoji {
 
+
+public class Emoji {
+	
+
+	/**
+	 * This method adds Emoji 
+	 * 
+	 * 
+	 *
+	 **/
 	public void addEmoji() {
+	
 		
 		
 	}
 	
-	public void scaleEmoji() {
+	/**
+	 * This method adjust size of current Emoji
+	 * @param x_axis is width
+	 * @param x_axis is height
+	 * 
+	 *
+	 **/
+	public void scaleEmoji(int x_axis, int y_axis) {
+		
+		return ;
+				
 		
 		
 	}
 	
-	public void rotateEmoji() {
+	
+	/**
+	 * This method rotate current Emoji
+	 * @param angle is degree to turn
+	 * 
+	 * 
+	 *
+	 **/
+	public void rotateEmoji(int angle) {
 		
 		
 	}
+	
+
 
 }
