@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
 /**
- * this class test greyfilter class
+ * this class to test greyfilter class
  * @author liulu
  *
  */
