@@ -15,12 +15,9 @@ public class UniReality {
 				try {
 					WindowBuilder window = new WindowBuilder();
 					window.getFrame().setVisible(true);
-				
-					//window.AddImage(FileName);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
 			}
 		});
 	}

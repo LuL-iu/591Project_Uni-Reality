@@ -5,6 +5,7 @@ public class GreyFilter implements Filter {
 		BufferedImage imgGrey = img;
 		int width = imgGrey.getWidth();
 		int height = imgGrey.getHeight();
+		//running through all the pixel in image, and make all the pixel to grey color(r=g=b=(r+g+b)/3)
 		for(int y = 0; y < height; y++){
 			for(int x = 0; x < width; x++){
 			    int p = imgGrey.getRGB(x,y);
@@ -17,7 +18,7 @@ public class GreyFilter implements Filter {
 				
 				//replace RGB value with avg
 			    p = (a<<24) | (avg<<16) | (avg<<8) | avg;
-			
+			    
 			    imgGrey.setRGB(x, y, p);
 			}
 		}
