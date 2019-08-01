@@ -1,4 +1,4 @@
-import java.awt.image.BufferedImage;
+ import java.awt.image.BufferedImage;
 //This class implements filter class, has function processImage, can return grey image
 public class GreyFilter implements Filter {
 	public BufferedImage processImage(BufferedImage img) {

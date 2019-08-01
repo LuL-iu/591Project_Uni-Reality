@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Panel;
 
 import javax.swing.JFrame;
@@ -6,13 +7,20 @@ import javax.swing.JLabel;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+
 /**
  * this is a window interaction class, it read user input, add image, display image, clear image, apply filter and add emoji, rotate/scale emoji, scale/rotate emoji
  * @author liulu
@@ -35,6 +43,10 @@ public class WindowBuilder {
 	private JButton btnNewButton_2;
 	private BufferedImage originImage;
 	private JButton btnClear;
+	 JButton openButton, saveButton;
+	    JTextArea log;
+	    JFileChooser fc;
+	    String filePath;
 
 	/**
 	 * Launch the application.This is for class test
@@ -83,28 +95,27 @@ public class WindowBuilder {
 	    // if user click, it reads the file name information from JTextField
 	    btnNewButton_1.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		String FileName = textField.getText();
-	    		try {
-	    			originImage = ImageIO.read(new File(FileName));
-	    			AddImage(originImage);
-	    		}catch(IOException e1) {
-	    			// TODO Auto-generated catch block
-	    			e1.printStackTrace();
-	    		}
-	    		
+	    		File f =  createFileChooser(btnNewButton_1);
+				try {
+					originImage = (BufferedImage)ImageIO.read(f);
+					AddImage(originImage);  
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 	
 	    	}
 	    });
 	    btnNewButton_1.setBounds(212, 725, 144, 23);
-	    frame.getContentPane().add(btnNewButton_1);
-	    //Create textFiled for typing the file name
-	    textField = new JTextField();
-	    textField.setBounds(360, 696, 129, 23);
-	    frame.getContentPane().add(textField);
-	    textField.setColumns(10);
-	    //Explain to user for typing file name
-	    JLabel lblTypeFileName = new JLabel("Type File Name");
-	    lblTypeFileName.setBounds(264, 700, 89, 14);
-	    frame.getContentPane().add(lblTypeFileName);
+        frame.getContentPane().add(btnNewButton_1);
+//	    //Create textFiled for typing the file name
+//	    textField = new JTextField();
+//	    textField.setBounds(360, 696, 129, 23);
+//	    frame.getContentPane().add(textField);
+//	    textField.setColumns(10);
+//	    //Explain to user for typing file name
+//	    JLabel lblTypeFileName = new JLabel("Type File Name");
+//	    lblTypeFileName.setBounds(264, 700, 89, 14);
+//	    frame.getContentPane().add(lblTypeFileName);
 	    //Add clear button
 	    btnClear = new JButton("Clear");
 	    btnClear.setBounds(496, 696, 89, 23);
@@ -119,6 +130,7 @@ public class WindowBuilder {
 	    btnNewButton_2 = new JButton("GreyFilter");
 		btnNewButton_2.setBounds(441, 725, 144, 23);
 	    frame.getContentPane().add(btnNewButton_2);
+	    
 	    btnNewButton_2.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		Filter grey = new GreyFilter();
@@ -126,7 +138,6 @@ public class WindowBuilder {
 	    		AddImage(greyImage);
 	    	}
 	    });
-		
 	}
 	
 	//Add Image to Panel and add to Frame
@@ -147,5 +158,23 @@ public class WindowBuilder {
 	public void clear() {
 		ImagePanel.removeAll();
 		frame.getContentPane().add(ImagePanel);
+	}
+	
+	public File createFileChooser(JButton a){
+		int i = 0;
+		JFileChooser fc = new JFileChooser();
+	    fc.addChoosableFileFilter(new ImageFilter());
+        fc.setAcceptAllFileFilterUsed(false);
+		int returnVal = fc.showOpenDialog(a);
+		while (i == 0){
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+	            File f = fc.getSelectedFile();
+	            filePath = f.getPath();
+	            i = 1;
+	            return f;
+			}
+		}
+		return null;
+		
 	}
 }
