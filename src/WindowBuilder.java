@@ -129,14 +129,29 @@ public class WindowBuilder {
 	    //Add grey filter button, if user click, image become grey and display on canvas
 	    btnNewButton_2 = new JButton("GreyFilter");
 		btnNewButton_2.setBounds(441, 725, 144, 23);
-	    frame.getContentPane().add(btnNewButton_2);
-	    
+	    frame.getContentPane().add(btnNewButton_2);  
 	    btnNewButton_2.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		Filter grey = new GreyFilter();
 	    		BufferedImage greyImage = grey.processImage(originImage);
 	    		AddImage(greyImage);
 	    	}
+	    });
+	    
+	    JButton btnMergefilter = new JButton("MergeFilter");
+	    btnMergefilter.setBounds(212, 690, 89, 23);
+	    frame.getContentPane().add(btnMergefilter);
+	    btnMergefilter.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Filter Merge = new MergeFilter();
+				BufferedImage MergeImage = Merge.processImage(originImage);
+				AddImage(MergeImage);
+				
+			}
+	    	
 	    });
 	}
 	
