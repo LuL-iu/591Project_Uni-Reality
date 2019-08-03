@@ -38,11 +38,13 @@ public class WindowBuilder {
 	}
     
 	private Panel ImagePanel;
-	private JButton btnNewButton_1;
+	private JButton btnAdd;
 	private JTextField textField;
-	private JButton btnNewButton_2;
+	private JButton btnGrey;
 	private BufferedImage originImage;
 	private JButton btnClear;
+	private int w;
+	private int h;
 	 JButton openButton, saveButton;
 	    JTextArea log;
 	    JFileChooser fc;
@@ -83,76 +85,40 @@ public class WindowBuilder {
 		frame.setBounds(0, 0, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		//create button for adding picture
-	    JButton btnNewButton = new JButton("Add Picture");
-	    btnNewButton.setBounds(406, 528, 89, 23);
 	    //create imagePanel for display image
 	    ImagePanel = new Panel();
 	    ImagePanel.setBounds(86, 10, 625, 674);
 	    frame.getContentPane().add(ImagePanel); 
 	    //Add image button
-	    btnNewButton_1 = new JButton("Add Image");
+	    btnAdd = new JButton("Add Image");
 	    // if user click, it reads the file name information from JTextField
-	    btnNewButton_1.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		File f =  createFileChooser(btnNewButton_1);
-				try {
-					originImage = (BufferedImage)ImageIO.read(f);
-					AddImage(originImage);  
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 	
-	    	}
-	    });
-	    btnNewButton_1.setBounds(212, 725, 144, 23);
-        frame.getContentPane().add(btnNewButton_1);
-//	    //Create textFiled for typing the file name
-//	    textField = new JTextField();
-//	    textField.setBounds(360, 696, 129, 23);
-//	    frame.getContentPane().add(textField);
-//	    textField.setColumns(10);
-//	    //Explain to user for typing file name
-//	    JLabel lblTypeFileName = new JLabel("Type File Name");
-//	    lblTypeFileName.setBounds(264, 700, 89, 14);
-//	    frame.getContentPane().add(lblTypeFileName);
+	    btnAdd.addActionListener(new chooseBtnListener());
+	    btnAdd.setBounds(86, 690, 144, 23);
+	    
+        frame.getContentPane().add(btnAdd);
 	    //Add clear button
 	    btnClear = new JButton("Clear");
-	    btnClear.setBounds(496, 696, 89, 23);
+	    btnClear.setBounds(266, 690, 89, 23);
 	    //if user click clear button, imagePanel cleared
-	    btnClear.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		clear();
-	    	}
-	    });
+	    btnClear.addActionListener(new clearBtn());
 	    frame.getContentPane().add(btnClear);
 	    //Add grey filter button, if user click, image become grey and display on canvas
-	    btnNewButton_2 = new JButton("GreyFilter");
-		btnNewButton_2.setBounds(441, 725, 144, 23);
-	    frame.getContentPane().add(btnNewButton_2);  
-	    btnNewButton_2.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		Filter grey = new GreyFilter();
-	    		BufferedImage greyImage = grey.processImage(originImage);
-	    		AddImage(greyImage);
-	    	}
-	    });
+	    btnGrey = new JButton("GreyFilter");
+		btnGrey.setBounds(567, 725, 144, 23);
+	    frame.getContentPane().add(btnGrey);  
+	    btnGrey.addActionListener(new GreyBtnListener());
 	    
-	    JButton btnMergefilter = new JButton("MergeFilter");
-	    btnMergefilter.setBounds(212, 690, 89, 23);
-	    frame.getContentPane().add(btnMergefilter);
-	    btnMergefilter.addActionListener(new ActionListener() {
+	    JButton btnMerge = new JButton("MergeFilter");
+	    btnMerge.setBounds(567, 690, 141, 23);
+	    frame.getContentPane().add(btnMerge);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				Filter Merge = new MergeFilter();
-				BufferedImage MergeImage = Merge.processImage(originImage);
-				AddImage(MergeImage);
-				
-			}
-	    	
-	    });
+	    btnMerge.addActionListener(new MergeBtnListener());
+	    
+	    
+	    JButton btnVoronoi = new JButton("VoronoiFilter");
+	    btnVoronoi.setBounds(404, 725, 144, 23);
+	    frame.getContentPane().add(btnVoronoi);
+	    btnVoronoi.addActionListener(new VoronoiBtnLisener());
 	}
 	
 	//Add Image to Panel and add to Frame
@@ -160,10 +126,14 @@ public class WindowBuilder {
 		//clear ImagePanel before adding
 		ImagePanel.removeAll();
 		frame.getContentPane().add(ImagePanel);
+		int w = ImagePanel.getWidth();
+		int h = ImagePanel.getHeight();
+		Scale s = new Scale();
+		image = s.FitImagetoFrame(image, w, h);
 		//Create label with image
 	    JLabel label = new JLabel(new ImageIcon(image));
 	    //set label size
-	    label.setBounds(72, 10, 625, 674);
+	    label.setBounds(86, 10, 625, 674);
 	    //add label to image panel
 	    ImagePanel.add(label);
 		frame.getContentPane().add(ImagePanel);
@@ -191,5 +161,51 @@ public class WindowBuilder {
 		}
 		return null;
 		
+	}
+	
+	public class VoronoiBtnLisener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+    		Filter voronoi = new VoronoiFilter();
+    		BufferedImage vorImage = voronoi.processImage(originImage);
+    		AddImage(vorImage);
+		}
+	}
+	
+	public class GreyBtnListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+    		Filter grey = new GreyFilter();
+    		BufferedImage greyImage = grey.processImage(originImage);
+    		AddImage(greyImage);
+    	}
+	}
+	
+	public class MergeBtnListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Filter Merge = new MergeFilter();
+			BufferedImage MergeImage = Merge.processImage(originImage);
+			AddImage(MergeImage);
+			
+		}
+	}
+	
+	public class chooseBtnListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+    		File f =  createFileChooser(btnAdd);
+			try {
+				originImage = (BufferedImage)ImageIO.read(f);
+				AddImage(originImage);  
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} 	
+    	}
+	}
+	
+	public class clearBtn implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+    		clear();
+    	}
 	}
 }

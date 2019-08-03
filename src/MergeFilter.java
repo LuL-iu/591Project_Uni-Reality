@@ -12,13 +12,13 @@ public class MergeFilter implements Filter {
 		File f = new File("black3" + ".jpg");
 		try {
 			BufferedImage toolImg = ImageIO.read(f);	
-			int h = toolImg.getHeight();
-			int w = toolImg.getWidth();
+			int h = image.getHeight();
+			int w = image.getWidth();
 			Scale sca = new Scale();
 			int i = 200;
 			int j = 200;
-			image = sca.resize(image, w, h);
-			BufferedImage outputImg = toolImg;
+			toolImg = sca.resizeToOneSide(toolImg, w, h);
+			BufferedImage outputImg = image;
 			for(int y = 0; y < h; y++){
 				for(int x = 0; x < w; x++){
 				int p = toolImg.getRGB(x, y);

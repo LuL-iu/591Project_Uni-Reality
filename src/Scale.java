@@ -21,7 +21,7 @@ public class Scale {
 	 * @param scaledHeight
 	 * @return
 	 */
-    public static BufferedImage resize(BufferedImage img, int scaledWidth, int scaledHeight){
+    public BufferedImage resize(BufferedImage img, int scaledWidth, int scaledHeight){
         // creates output image
         BufferedImage outputImage = new BufferedImage(scaledWidth,
                 scaledHeight, img.getType());
@@ -39,11 +39,30 @@ public class Scale {
      * @param percent
      * @return
      */
-    public static BufferedImage resize(BufferedImage img, double percent) {
+    public  BufferedImage resizeByPercent(BufferedImage img, double percent) {
         int scaledWidth = (int) (img.getWidth() * percent);
         int scaledHeight = (int) (img.getHeight() * percent);
         BufferedImage outputImage = resize(img, scaledWidth, scaledHeight);
         return outputImage; 
     }
  
+    public BufferedImage FitImagetoFrame(BufferedImage img, int frameW, int frameH) {
+    	int w = img.getWidth();
+    	int h = img.getHeight();
+    	double wRatio = (double)frameW/w;
+    	double hRatio = (double)frameH/h;
+    	double Ratio = wRatio < hRatio ? wRatio : hRatio;
+    	BufferedImage outputImage = resizeByPercent(img, Ratio);
+    	return outputImage;
+    }
+    
+    public BufferedImage resizeToOneSide(BufferedImage img, int frameW, int frameH) {
+    	int w = img.getWidth();
+    	int h = img.getHeight();
+    	double wRatio = (double)frameW/w;
+    	double hRatio = (double)frameH/h;
+    	double Ratio = wRatio < hRatio ? hRatio : wRatio;
+    	BufferedImage outputImage = resizeByPercent(img, Ratio);
+    	return outputImage;
+    }
 }
