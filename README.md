@@ -1,6 +1,6 @@
 # UniReality
 > This is a program that makes photos/gif stunning and sensational by applying various filters, changing phone hues and adding emoji stickers
-
+ 
 
 
 
@@ -28,7 +28,7 @@ List of features ready
 * Save file to folder
 
 ## Example
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/FilterExample.png)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/Screen%20Shot%202019-08-04%20at%206.48.57%20PM.png)
 
 
 ## Limitation
