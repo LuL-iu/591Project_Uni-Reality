@@ -280,6 +280,7 @@ public class WindowBuilder {
 				System.out.println("Please select a image first.");
 				return;
 			}
+			
 			// TODO Auto-generated method stub
 			Filter Merge = new MergeFilter();
 			BufferedImage MergeImage = Merge.processImage(processImage);
