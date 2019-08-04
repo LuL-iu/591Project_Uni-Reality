@@ -5,7 +5,7 @@ public class SaturationFilter extends AbstractExtentFilter {
 
     /**
        * This is the main method which takes the selected photo, change the hue of the selected picture and return a picture with amended hue.
-       * @param raw thid is selected photo.
+       * @param raw this is selected photo.
        * @param value this is hue value to be adjusted.
        * @return BufferedImage Object.
        */
