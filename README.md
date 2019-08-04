@@ -8,14 +8,14 @@
 * [Contact](#contact)
 
 ## General info
-We started with exploring how photo processing application works. Then we decided to make our own processing application with our favourite filter and emoji library
+We started with exploring how photo processing application works. Then we decided to make our own processing application with our favorite filter and emoji library
 
 
 ## Setup
 Please open this application in 1920 * 1080 or higher resolution monitor 
 
 ## Features
-List of features ready and TODOs for future development
+List of features ready 
 * Select photo locally 
 * Apply contrast filter, grey filter, and blur filter
 * Add Emoji
