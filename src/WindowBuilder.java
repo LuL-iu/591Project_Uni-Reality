@@ -176,15 +176,17 @@ public class WindowBuilder {
         contrastBtn.addActionListener(contrastListener);
         
         //if user click, it will call the hue filter and adjust the hue level 
-        JButton Hue = new JButton("Adjust Hue");
-        Hue.setBounds(123, 498, 101, 23);
-        frame.getContentPane().add(Hue);
+        JButton HueBtn = new JButton("Adjust Hue");
+        HueBtn.setBounds(123, 498, 101, 23);
+        frame.getContentPane().add(HueBtn);
+        HueBtn.addActionListener(saturationListener); 
         
+        //instruction for add emoji
         JLabel lblSelectEmojiFrom = new JLabel("Select Emoji from the list, then click add emoji");
         lblSelectEmojiFrom.setHorizontalAlignment(SwingConstants.LEFT);
         lblSelectEmojiFrom.setBounds(249, 527, 325, 23);
         frame.getContentPane().add(lblSelectEmojiFrom);
-        saturation.addActionListener(saturationListener);    
+     
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
@@ -205,7 +207,7 @@ public class WindowBuilder {
 	}
 	
 
-	
+	//emojiListener if will add the emoji user selected from the list 
 	public class emojiListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			ImagePanel.removeAll();
@@ -233,18 +235,24 @@ public class WindowBuilder {
 		}
 	}
 	
+	//it return the file that user select from file explore
 	public File createFileChooser(JButton a){
 		int i = 0;
 		JFileChooser fc = new JFileChooser();
+		//apply the image filter, only show image in the file explore
 	    fc.addChoosableFileFilter(new ImageFilter());
         fc.setAcceptAllFileFilterUsed(false);
 		int returnVal = fc.showOpenDialog(a);
+		//wait for user to choose, 
 		while (i == 0){
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File f = fc.getSelectedFile();
 	            filePath = f.getPath();
 	            i = 1;
 	            return f;
+			}
+			else {
+				return null;
 			}
 		}
 		return null;
@@ -298,6 +306,9 @@ public class WindowBuilder {
 	public class chooseBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
     		File f =  createFileChooser(btnAdd);
+    		if(f == null) {
+    			return;
+    		}
     		fileName = f.getName();
 			try {
 				originImage = (BufferedImage)ImageIO.read(f);
