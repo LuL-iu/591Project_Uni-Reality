@@ -72,51 +72,7 @@ public class WindowBuilder {
 	private JFileChooser fc;
     private Integer initial = 1;
     private Integer saturation = 5;
-  // private Integer degree = 45;
-    private ActionListener addContrast = (event) -> {
-        ContrastFilter contrastFilter = new ContrastFilter();
-        if (originImage == null) {
-            return;
-        }
-        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, initial);
-        AddImage(vorImage);
-        initial += 5;
-    };
 
-    private ActionListener minusContrast = (event) -> {
-        ContrastFilter contrastFilter = new ContrastFilter();
-        if (originImage == null) {
-            return;
-        }
-        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, initial);
-        AddImage(vorImage);
-        initial -= 5;
-    };
-
-    private ActionListener saturationListener = (event) -> {
-        SaturationFilter contrastFilter = new SaturationFilter();
-        if (originImage == null) {
-            return;
-        }
-        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, saturation);
-        AddImage(vorImage);
-        saturation +=5;
-    };
-
-    private ActionListener contrastListener = (event) -> {
-        plus = new JButton("+");
-        // if user click, it reads the file name information from JTextField
-        plus.addActionListener(minusContrast);
-        plus.setBounds(10, 10, 50, 50);
-        frame.getContentPane().add(plus);
-
-        minus = new JButton("-");
-        // if user click, it reads the file name information from JTextField
-        minus.addActionListener(addContrast);
-        minus.setBounds(10, 100, 50, 50);
-        frame.getContentPane().add(minus);
-        frame.repaint();
-    };
     
 	/**
 	 * Launch the application.This is for class test
@@ -383,4 +339,48 @@ public class WindowBuilder {
 			}
 		}
 	}
+	 private ActionListener addContrast = (event) -> {
+	        ContrastFilter contrastFilter = new ContrastFilter();
+	        if (originImage == null) {
+	            return;
+	        }
+	        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, initial);
+	        AddImage(vorImage);
+	        initial += 5;
+	    };
+
+	    private ActionListener minusContrast = (event) -> {
+	        ContrastFilter contrastFilter = new ContrastFilter();
+	        if (originImage == null) {
+	            return;
+	        }
+	        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, initial);
+	        AddImage(vorImage);
+	        initial -= 5;
+	    };
+
+	    private ActionListener saturationListener = (event) -> {
+	        SaturationFilter contrastFilter = new SaturationFilter();
+	        if (originImage == null) {
+	            return;
+	        }
+	        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, saturation);
+	        AddImage(vorImage);
+	        saturation +=5;
+	    };
+
+	    private ActionListener contrastListener = (event) -> {
+	        plus = new JButton("+");
+	        // if user click, it reads the file name information from JTextField
+	        plus.addActionListener(minusContrast);
+	        plus.setBounds(10, 10, 50, 50);
+	        frame.getContentPane().add(plus);
+
+	        minus = new JButton("-");
+	        // if user click, it reads the file name information from JTextField
+	        minus.addActionListener(addContrast);
+	        minus.setBounds(10, 100, 50, 50);
+	        frame.getContentPane().add(minus);
+	        frame.repaint();
+	    };
 }
