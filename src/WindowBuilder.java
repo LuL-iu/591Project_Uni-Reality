@@ -32,6 +32,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.BoxLayout;
 
 import java.awt.BorderLayout;
@@ -60,7 +62,7 @@ public class WindowBuilder {
 	private JButton btnGrey;
 	private BufferedImage originImage;
 	private BufferedImage processImage;
-	static private BufferedImage clearImage;
+	static private Image clearImage;
 	private JButton btnClear;
 	private int w;
 	private int h;
@@ -352,8 +354,8 @@ public class WindowBuilder {
 	
 	public class clearBtn implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			processImage = clearImage;
-			AddImage(clearImage);
+			processImage = (BufferedImage) clearImage;
+			AddImage((BufferedImage) clearImage);
     	}
 	}
 	

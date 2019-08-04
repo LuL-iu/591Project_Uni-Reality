@@ -35,7 +35,7 @@ public class VoronoiFilter extends JFrame implements Filter {
 		BufferedImage orgImg = image;
 		height = orgImg.getHeight();
 		width = orgImg.getWidth();
-		cells = (height + width) * 2; 
+		cells = (height + width); 
 		setBounds(0, 0, width, height);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		int n = 0;
