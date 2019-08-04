@@ -9,17 +9,17 @@ public class SaturationFilter extends AbstractExtentFilter {
         int HEIGHT = raw.getHeight();
         int iHUE;
         BufferedImage processed = new BufferedImage(WIDTH,HEIGHT,raw.getType());
-        do
-        {
-            System.out.print("Hue (0-360):");
+//        do
+//        {
+//            System.out.print("Hue (0-360):");
             iHUE = (int) value;
-            if(iHUE > 360 || iHUE < 0)
-            {
-                System.out.println("Please enter a hue value between 0-360.");
-            }
-        }
+//            if(iHUE > 360 || iHUE < 0)
+//            {
+//                System.out.println("Please enter a hue value between 0-360.");
+//            }
+//        }
 
-        while((iHUE > 360 || iHUE < 0));
+//        while((iHUE > 360 || iHUE < 0));
         float hue = iHUE/360.0f;
 
         for(int Y=0; Y<HEIGHT;Y++)
