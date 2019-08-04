@@ -106,12 +106,12 @@ public class WindowBuilder {
 	private void initialize() {
 		//create frame
 		frame = new JFrame();
-		frame.setBounds(0, 0, 800, 800);
+		frame.setBounds(0, 0, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	    //create imagePanel for display image
 	    ImagePanel = new Panel();
-	    ImagePanel.setBounds(124, 10, 581, 596);
+	    ImagePanel.setBounds(55, 42, 519, 370);
 	    w = ImagePanel.getWidth();
 	    h = ImagePanel.getHeight();
 	    frame.getContentPane().add(ImagePanel);
@@ -121,40 +121,40 @@ public class WindowBuilder {
 	    btnAdd.setBackground(new Color(240, 248, 255));
 	    // if user click, it reads the file name information from JTextField
 	    btnAdd.addActionListener(new chooseBtnListener());
-	    btnAdd.setBounds(10, 628, 144, 23);
+	    btnAdd.setBounds(12, 430, 101, 23);
 	    
         frame.getContentPane().add(btnAdd);
 	    //Add clear button
 	    btnClear = new JButton("Clear");
-	    btnClear.setBounds(320, 628, 136, 23);
+	    btnClear.setBounds(234, 430, 101, 23);
 	    //if user click clear button, imagePanel cleared
 	    btnClear.addActionListener(new clearBtnListener());
 	    frame.getContentPane().add(btnClear);
 	    
 	    //Add grey filter button, if user click, image become grey and display on canvas
 	    btnGrey = new JButton("GreyFilter");
-		btnGrey.setBounds(320, 662, 136, 23);
+		btnGrey.setBounds(234, 464, 101, 23);
 	    frame.getContentPane().add(btnGrey);  
 	    btnGrey.addActionListener(new GreyBtnListener());
 	    
 	    JButton btnMerge = new JButton("MergeFilter");
-	    btnMerge.setBounds(164, 662, 146, 23);
+	    btnMerge.setBounds(123, 464, 101, 23);
 	    frame.getContentPane().add(btnMerge);
 	    btnMerge.addActionListener(new MergeBtnListener());
 	    
 	    
 	    JButton btnVoronoi = new JButton("VoronoiFilter");
-	    btnVoronoi.setBounds(10, 662, 144, 23);
+	    btnVoronoi.setBounds(12, 464, 101, 23);
 	    frame.getContentPane().add(btnVoronoi);
 	    btnVoronoi.addActionListener(new VoronoiBtnLisener());
 	    
 	    JButton btnSaveImage = new JButton("Save Image");
-	    btnSaveImage.setBounds(164, 628, 146, 23);
+	    btnSaveImage.setBounds(123, 430, 101, 23);
 	    frame.getContentPane().add(btnSaveImage);
 	    btnSaveImage.addActionListener(new saveBthListener());
 	    
 	    JButton btnAddEmoji = new JButton("Add Emoji");
-	    btnAddEmoji.setBounds(646, 628, 128, 23);
+	    btnAddEmoji.setBounds(473, 498, 101, 23);
 	    frame.getContentPane().add(btnAddEmoji);
 	    btnAddEmoji.addActionListener(new emojiListener());
 
@@ -163,21 +163,21 @@ public class WindowBuilder {
 	    emojiName[1] = "heart";
 	    emojiName[2] = "comfort";
 	    list = new JList(emojiName);
-	    list.setBounds(481, 631, 144, 88);
+	    list.setBounds(345, 433, 118, 88);
 	    frame.getContentPane().add(list);
 
 	    JButton contrastBtn = new JButton("Contrast");
-        contrastBtn.setBounds(10, 696, 144, 23);
+        contrastBtn.setBounds(12, 498, 101, 23);
         frame.getContentPane().add(contrastBtn);
         contrastBtn.addActionListener(contrastListener);
 
         JButton saturation = new JButton("Adjust Hue");
-        saturation.setBounds(164, 696, 146, 23);
+        saturation.setBounds(123, 498, 101, 23);
         frame.getContentPane().add(saturation);
         
         JLabel lblSelectEmojiFrom = new JLabel("Select Emoji from the list, then click add emoji");
         lblSelectEmojiFrom.setHorizontalAlignment(SwingConstants.LEFT);
-        lblSelectEmojiFrom.setBounds(425, 727, 268, 23);
+        lblSelectEmojiFrom.setBounds(297, 527, 277, 23);
         frame.getContentPane().add(lblSelectEmojiFrom);
         saturation.addActionListener(saturationListener);    
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -218,7 +218,7 @@ public class WindowBuilder {
 			}
 			else {
 				JLabel background = new JLabel(new ImageIcon(processImage));
-				imageLbl.setBounds(80, 400, 200,150);
+				imageLbl.setBounds(80, 100, 200,150);
 				background.setBounds(ImagePanel.getBounds());
 				background.setLayout(new GridBagLayout());
 			    background.add(imageLbl);
@@ -345,8 +345,8 @@ public class WindowBuilder {
 	        if (originImage == null) {
 	            return;
 	        }
-	        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, initial);
-	        AddImage(vorImage);
+	        BufferedImage contrastImage = contrastFilter.processImageWithValue(processImage, initial);
+	        AddImage(contrastImage);
 	        initial += 5;
 	    };
 
@@ -355,8 +355,8 @@ public class WindowBuilder {
 	        if (originImage == null) {
 	            return;
 	        }
-	        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, initial);
-	        AddImage(vorImage);
+	        BufferedImage contrastImage = contrastFilter.processImageWithValue(processImage, initial);
+	        AddImage(contrastImage);
 	        initial -= 5;
 	    };
 
@@ -365,8 +365,8 @@ public class WindowBuilder {
 	        if (originImage == null) {
 	            return;
 	        }
-	        BufferedImage vorImage = contrastFilter.processImageWithValue(originImage, saturation);
-	        AddImage(vorImage);
+	        BufferedImage Img = contrastFilter.processImageWithValue(processImage, saturation);
+	        AddImage(Img);
 	        saturation +=5;
 	    };
 
@@ -374,13 +374,13 @@ public class WindowBuilder {
 	        plus = new JButton("+");
 	        // if user click, it reads the file name information from JTextField
 	        plus.addActionListener(minusContrast);
-	        plus.setBounds(10, 10, 50, 50);
+	        plus.setBounds(5, 10, 50, 50);
 	        frame.getContentPane().add(plus);
 
 	        minus = new JButton("-");
 	        // if user click, it reads the file name information from JTextField
 	        minus.addActionListener(addContrast);
-	        minus.setBounds(10, 100, 50, 50);
+	        minus.setBounds(5, 70, 50, 50);
 	        frame.getContentPane().add(minus);
 	        frame.repaint();
 	    };
