@@ -9,7 +9,7 @@ public class MergeFilter implements Filter {
 	
 	
 	public BufferedImage processImage(BufferedImage image) {
-		File f = new File("black3" + ".jpg");
+		File f = new File("Flowers" + ".jpg");
 		try {
 			BufferedImage toolImg = ImageIO.read(f);	
 			int h = image.getHeight();
@@ -17,6 +17,7 @@ public class MergeFilter implements Filter {
 			Scale sca = new Scale();
 			int i = 200;
 			int j = 200;
+			int m = 200;
 			toolImg = sca.resizeToOneSide(toolImg, w, h);
 			BufferedImage outputImg = image;
 			for(int y = 0; y < h; y++){
@@ -32,24 +33,31 @@ public class MergeFilter implements Filter {
 				int g2 = (p2>>8)&0xff;
 				int b2 = p2 & 0xff;
 				int avg = (a2+r2+g2)/3;
-				p2 = (a| (r2+i)/2 <<16|g2<<8|b2);
+				p2 = (a| (r2+i)/2 <<16|avg<<8|avg);
 			    int p3 = (a| avg<<16|avg<<8|avg);
-				if(r + g + b >300) {
-					
+			    int p4 = (a| r <<16|(g2 +m)/2<<8|b2);
+				if(r < 100) {					
 					outputImg.setRGB(x, y, p2);
 					i = i+1;
 					if(i == 255) {
 						i = 200;
 					}
 				}
-				else{	
+				else if(g > 100){	
 					outputImg.setRGB(x, y, p3);
 					j = j-1;
 					if(j == 0) {
 						j = 200;
 					}
 				}
+				else if(b > 100) {
+					outputImg.setRGB(x, y, p4);
+					m = m+1;
+					if(m == 255) {
+						m = 200;
+					}
 				}
+			}
 			}
 			return outputImg;
 			
