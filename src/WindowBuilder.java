@@ -58,11 +58,10 @@ public class WindowBuilder {
 	private Panel ImagePanel;
     private JButton plus, minus;
 	private JButton btnAdd;
-	private JTextField textField;
 	private JButton btnGrey;
+	private String filePath;
 	private BufferedImage originImage;
 	private BufferedImage processImage;
-	static private Image clearImage;
 	private JButton btnClear;
 	private int w;
 	private int h;
@@ -70,13 +69,10 @@ public class WindowBuilder {
 	private JList<String> list;
 	private boolean add = false;
 	JButton openButton, saveButton;
-	JTextArea log;
-	JFileChooser fc;
-	String filePath;
-	
+	private JFileChooser fc;
     private Integer initial = 1;
     private Integer saturation = 5;
-    private Integer degree = 45;
+  // private Integer degree = 45;
     private ActionListener addContrast = (event) -> {
         ContrastFilter contrastFilter = new ContrastFilter();
         if (originImage == null) {
@@ -111,24 +107,17 @@ public class WindowBuilder {
         plus = new JButton("+");
         // if user click, it reads the file name information from JTextField
         plus.addActionListener(minusContrast);
-        plus.setBounds(850, 120, 50, 50);
+        plus.setBounds(10, 10, 50, 50);
         frame.getContentPane().add(plus);
 
         minus = new JButton("-");
         // if user click, it reads the file name information from JTextField
         minus.addActionListener(addContrast);
-        minus.setBounds(850, 300, 50, 50);
+        minus.setBounds(10, 100, 50, 50);
         frame.getContentPane().add(minus);
         frame.repaint();
     };
-
-//    private ActionListener rotateListener = (event) -> {
-//        ((RotatePanel)ImagePanel).setDegree(degree);
-//        ImagePanel.repaint();
-//        degree = degree + 45;
-//    };
-
-
+    
 	/**
 	 * Launch the application.This is for class test
 	 */
@@ -167,6 +156,8 @@ public class WindowBuilder {
 	    //create imagePanel for display image
 	    ImagePanel = new Panel();
 	    ImagePanel.setBounds(124, 10, 581, 596);
+	    w = ImagePanel.getWidth();
+	    h = ImagePanel.getHeight();
 	    frame.getContentPane().add(ImagePanel);
 	    ImagePanel.setLayout(new BoxLayout(ImagePanel, BoxLayout.X_AXIS));
 	    //Add image button
@@ -181,8 +172,9 @@ public class WindowBuilder {
 	    btnClear = new JButton("Clear");
 	    btnClear.setBounds(320, 628, 136, 23);
 	    //if user click clear button, imagePanel cleared
-	    btnClear.addActionListener(new clearBtn());
+	    btnClear.addActionListener(new clearBtnListener());
 	    frame.getContentPane().add(btnClear);
+	    
 	    //Add grey filter button, if user click, image become grey and display on canvas
 	    btnGrey = new JButton("GreyFilter");
 		btnGrey.setBounds(320, 662, 136, 23);
@@ -192,7 +184,6 @@ public class WindowBuilder {
 	    JButton btnMerge = new JButton("MergeFilter");
 	    btnMerge.setBounds(164, 662, 146, 23);
 	    frame.getContentPane().add(btnMerge);
-
 	    btnMerge.addActionListener(new MergeBtnListener());
 	    
 	    
@@ -204,6 +195,7 @@ public class WindowBuilder {
 	    JButton btnSaveImage = new JButton("Save Image");
 	    btnSaveImage.setBounds(164, 628, 146, 23);
 	    frame.getContentPane().add(btnSaveImage);
+	    btnSaveImage.addActionListener(new saveBthListener());
 	    
 	    JButton btnAddEmoji = new JButton("Add Emoji");
 	    btnAddEmoji.setBounds(646, 628, 128, 23);
@@ -212,8 +204,8 @@ public class WindowBuilder {
 
 	    String[] emojiName = new String[5];
 	    emojiName[0] = "angry";
-	    emojiName[1] = "comfort";
-	    emojiName[2] = "heart";
+	    emojiName[1] = "heart";
+	    emojiName[2] = "comfort";
 	    list = new JList(emojiName);
 	    list.setBounds(481, 631, 144, 88);
 	    frame.getContentPane().add(list);
@@ -242,17 +234,12 @@ public class WindowBuilder {
 		//clear ImagePanel before adding
 		ImagePanel.removeAll();
 		frame.getContentPane().add(ImagePanel);
-	    w = ImagePanel.getWidth();
-		h = ImagePanel.getHeight();
-		Scale s = new Scale();
-		image = s.FitImagetoFrame(image, w, h);
 		//Create label with image
 	    JLabel label = new JLabel(new ImageIcon(image));
 	    //set label size
 	    label.setBounds(ImagePanel.getBounds());
 	    //add label to image panel
-	
-	    ImagePanel.add(label, BorderLayout.CENTER);;
+	    ImagePanel.add(label, BorderLayout.CENTER);
 		frame.getContentPane().add(ImagePanel);
 	}
 	
@@ -274,10 +261,8 @@ public class WindowBuilder {
 				return;
 			}
 			else {
-				Scale s = new Scale();
-				BufferedImage img = s.FitImagetoFrame(processImage, w, h);
-				JLabel background = new JLabel(new ImageIcon(img));
-				imageLbl.setBounds(ImagePanel.getBounds());
+				JLabel background = new JLabel(new ImageIcon(processImage));
+				imageLbl.setBounds(80, 400, 200,150);
 				background.setBounds(ImagePanel.getBounds());
 				background.setLayout(new GridBagLayout());
 			    background.add(imageLbl);
@@ -307,6 +292,11 @@ public class WindowBuilder {
 	
 	public class VoronoiBtnLisener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if(!add) {
+				System.out.println("Please select a image first.");
+				return;
+			}
+			System.out.println("It might take a while. Please wait for image processing.");
     		Filter voronoi = new VoronoiFilter();
     		BufferedImage vorImage = voronoi.processImage(processImage);
     		processImage = vorImage;
@@ -316,6 +306,10 @@ public class WindowBuilder {
 	
 	public class GreyBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if(!add) {
+				System.out.println("Please select a image first.");
+				return;
+			}
     		Filter grey = new GreyFilter();
     		BufferedImage greyImage = grey.processImage(processImage);
     		processImage = greyImage;
@@ -326,6 +320,10 @@ public class WindowBuilder {
 	public class MergeBtnListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			if(!add) {
+				System.out.println("Please select a image first.");
+				return;
+			}
 			// TODO Auto-generated method stub
 			Filter Merge = new MergeFilter();
 			BufferedImage MergeImage = Merge.processImage(processImage);
@@ -341,8 +339,9 @@ public class WindowBuilder {
     		fileName = f.getName();
 			try {
 				originImage = (BufferedImage)ImageIO.read(f);
+				Scale s = new Scale();
+				originImage = s.FitImagetoFrame(originImage, w, h);
 				processImage = originImage;
-				clearImage = originImage;
 				AddImage(originImage);  
 				add = true;
 			} catch (IOException e1) {
@@ -352,18 +351,32 @@ public class WindowBuilder {
     	}
 	}
 	
-	public class clearBtn implements ActionListener {
+	public class clearBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			processImage = (BufferedImage) clearImage;
-			AddImage((BufferedImage) clearImage);
+			File f = new File(filePath);
+			try {
+				originImage = ImageIO.read(f);
+				Scale s = new Scale();
+				originImage = s.FitImagetoFrame(originImage, w, h);
+				processImage = originImage;
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			AddImage(processImage);
     	}
 	}
 	
-	public class saveBth implements ActionListener {
+	public class saveBthListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			File output = new File(fileName+"modified");
+			if(!add) {
+				System.out.println("Please select a image first.");
+				return;
+			}
+			File output = new File("Modified" + fileName);
 			try {
 				ImageIO.write(processImage, "jpg", output);
+				System.out.println("image save sucessfull!");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
