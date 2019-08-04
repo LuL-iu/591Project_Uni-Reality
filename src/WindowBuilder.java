@@ -41,8 +41,8 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 
 /**
- * this is a window interaction class, it read user input, add image, display image, clear image, apply filter and add emoji, rotate/scale emoji, scale/rotate emoji
- * @author liulu
+ * this is a window interaction class, it read user input, add image, display image, clear image, apply filter and add emoji
+ * 
  *
  */
 public class WindowBuilder {
@@ -51,7 +51,6 @@ public class WindowBuilder {
 	public JFrame getFrame() {
 		return frame;
 	}
-
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
@@ -137,47 +136,53 @@ public class WindowBuilder {
 	    frame.getContentPane().add(btnGrey);  
 	    btnGrey.addActionListener(new GreyBtnListener());
 	    
+	    //Add Merge Filter, if user click, image merge the default image and dispaly on canvas
 	    JButton btnMerge = new JButton("MergeFilter");
 	    btnMerge.setBounds(123, 464, 101, 23);
 	    frame.getContentPane().add(btnMerge);
 	    btnMerge.addActionListener(new MergeBtnListener());
 	    
-	    
-	    JButton btnVoronoi = new JButton("VoronoiFilter");
+	    //Add Voronoi Filter, if user click, image apply voronoi filter generate voronoi grid and paint the diagram with original image
+	    JButton btnVoronoi = new JButton("VorFilter");
 	    btnVoronoi.setBounds(12, 464, 101, 23);
 	    frame.getContentPane().add(btnVoronoi);
 	    btnVoronoi.addActionListener(new VoronoiBtnLisener());
 	    
+	    //if user click the save btn, it saved the process image to the project folder
 	    JButton btnSaveImage = new JButton("Save Image");
 	    btnSaveImage.setBounds(123, 430, 101, 23);
 	    frame.getContentPane().add(btnSaveImage);
 	    btnSaveImage.addActionListener(new saveBthListener());
 	    
+	    //if user choose the emoji from the list and then click add emoji, it will add the emoji from the source library and display infront of original image
 	    JButton btnAddEmoji = new JButton("Add Emoji");
 	    btnAddEmoji.setBounds(473, 498, 101, 23);
 	    frame.getContentPane().add(btnAddEmoji);
 	    btnAddEmoji.addActionListener(new emojiListener());
-
-	    String[] emojiName = new String[5];
+        
+	    //create an emoji list name and display on the Jlist 
+	    String[] emojiName = new String[3];
 	    emojiName[0] = "angry";
 	    emojiName[1] = "heart";
 	    emojiName[2] = "comfort";
 	    list = new JList(emojiName);
 	    list.setBounds(345, 433, 118, 88);
 	    frame.getContentPane().add(list);
-
+        
+	    //if user click, it will add the "+" and "-" button, and adjust the contrast level based on "+" or "-"
 	    JButton contrastBtn = new JButton("Contrast");
         contrastBtn.setBounds(12, 498, 101, 23);
         frame.getContentPane().add(contrastBtn);
         contrastBtn.addActionListener(contrastListener);
-
-        JButton saturation = new JButton("Adjust Hue");
-        saturation.setBounds(123, 498, 101, 23);
-        frame.getContentPane().add(saturation);
+        
+        //if user click, it will call the hue filter and adjust the hue level 
+        JButton Hue = new JButton("Adjust Hue");
+        Hue.setBounds(123, 498, 101, 23);
+        frame.getContentPane().add(Hue);
         
         JLabel lblSelectEmojiFrom = new JLabel("Select Emoji from the list, then click add emoji");
         lblSelectEmojiFrom.setHorizontalAlignment(SwingConstants.LEFT);
-        lblSelectEmojiFrom.setBounds(297, 527, 277, 23);
+        lblSelectEmojiFrom.setBounds(249, 527, 325, 23);
         frame.getContentPane().add(lblSelectEmojiFrom);
         saturation.addActionListener(saturationListener);    
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

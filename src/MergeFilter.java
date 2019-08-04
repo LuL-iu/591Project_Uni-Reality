@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 /**
  * this class implements filter class can merge two image together, according to the tool image pixel average value, change main image pixel 
- * @author liulu
+ * 
  *
  */
 public class MergeFilter implements Filter {
