@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class SaturationFilter extends AbstractExtentFilter {
+public class HueFilter extends AbstractExtentFilter {
 
     /**
        * This is the main method which takes the selected photo, change the hue of the selected picture and return a picture with amended hue.

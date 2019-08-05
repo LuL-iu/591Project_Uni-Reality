@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
-public class ContrastFilter extends AbstractExtentFilter  {
+public class BrightnessFilter extends AbstractExtentFilter  {
 
-   private float scaleFactor=1.2f;
+   private float scaleFactor= 1.0f;
 
 
      /**

@@ -30,22 +30,22 @@ List of features ready
 ## Example
 
 ### Add Image 
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%201.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process0.JPG)
 
 ### VorFilter
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%202.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process1.JPG)
 
 ### MergeFilter
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%203.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process2.JPG)
 
 ### ContrastFilter
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%204.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process3.JPG)
 
 ### AdjustHue
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%205.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process4.JPG)
 
 ### AddEmoji
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%207.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process6.JPG)
 
 
 ## Limitation
