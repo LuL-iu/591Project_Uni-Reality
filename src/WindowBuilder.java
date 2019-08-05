@@ -322,10 +322,10 @@ public class WindowBuilder {
 	public class chooseBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
     		File f =  createFileChooser(btnAdd);
-    		filePath = f.getPath();
     		if(f == null) {
     			return;
     		}
+    		filePath = f.getPath();
     		fileName = f.getName();
 			try {
 				originImage = (BufferedImage)ImageIO.read(f);
