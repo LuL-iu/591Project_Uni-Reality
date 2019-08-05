@@ -38,6 +38,9 @@ List of features ready
 ### MergeFilter
 ![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%203.JPG)
 
+### ContrastFilter
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%204.JPG)
+
 ### AdjustHue
 ![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%205.JPG)
 
