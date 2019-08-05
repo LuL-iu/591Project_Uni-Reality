@@ -162,10 +162,11 @@ public class WindowBuilder {
 	    btnAddEmoji.addActionListener(new emojiListener());
         
 	    //create an emoji list name and display on the Jlist 
-	    String[] emojiName = new String[3];
+	    String[] emojiName = new String[4];
 	    emojiName[0] = "angry";
 	    emojiName[1] = "heart";
 	    emojiName[2] = "comfort";
+	    emojiName[3] = "pika";
 	    list = new JList(emojiName);
 	    list.setBounds(345, 433, 118, 88);
 	    frame.getContentPane().add(list);

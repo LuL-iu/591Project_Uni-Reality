@@ -42,7 +42,7 @@ public class VoronoiFilter extends JFrame implements Filter {
 		BufferedImage orgImg = image;
 		height = orgImg.getHeight();
 		width = orgImg.getWidth();
-		cells = (height + width); 
+		cells = (height + width)*2; 
 		int n = 0;
 		Random rand = new Random();
 		newImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
