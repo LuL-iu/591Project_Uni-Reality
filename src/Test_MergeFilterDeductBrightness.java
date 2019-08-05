@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * this class is used for testing image applying merge filter and decrease brightness
+ * @author liulu
+ *
+ */
 class Test_MergeFilterDeductBrightness {
 	private MergeFilter mf;
 	private BrightnessFilter bf;
@@ -38,12 +42,14 @@ class Test_MergeFilterDeductBrightness {
 			int avg1 = (b1+r1+g1)/3;
 			//merge two image
 			BufferedImage processImage = mf.MergeImage(img, toolImg);
+			//decreasae image brightness by 5
 			processImage = bf.processImageWithValue(processImage, -5);
 			int p2 = processImage.getRGB(0, 0);
 			int r2 = (p2>>16)&0xff;
 			int g2 = (p2>>8)&0xff;
 			int b2 = p2&0xff;
 			boolean value = false;
+			//check whether two images are merged and merged image brightness decreased by 5
 			if(avg1 < 50) {
 				if(r2 == (r + 200)/2 +5) {
 					value = true;

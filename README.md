@@ -47,7 +47,7 @@ List of features ready
 ### GreyFilter
 ![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process5.JPG)
 
-### AddEmoji
+### AddEmoji(GIF)
 ![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process6.JPG)
 
 

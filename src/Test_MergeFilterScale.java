@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * this class is used for testing image applying scale filter and then merge filter
+ * @author liulu
+ *
+ */
 class Test_MergeFilterScale {
 
 	private MergeFilter mf;
@@ -17,11 +21,12 @@ class Test_MergeFilterScale {
 		try {
 			//create image
 			BufferedImage img = ImageIO.read(new File("example.jpg"));
+			//scale image to fit to frame size
 			Scale s = new Scale();
 			BufferedImage processImage = s.FitImagetoFrame(img, 500, 500);
 			int width = img.getWidth();
 			int height = img.getHeight();
-			
+			//create tool image
 			BufferedImage toolImg = ImageIO.read(new File("Example_Merge.jpg"));
 			
 			int p = processImage.getRGB(0, 0);
@@ -42,6 +47,7 @@ class Test_MergeFilterScale {
 			int g2 = (p2>>8)&0xff;
 			int b2 = p2&0xff;
 			boolean value = true;
+			//check whether image is be scale to fit the screen and merged with tool image 
 			if (width > height) {
 				if (processImage.getWidth() != 500) {
 					value = false;

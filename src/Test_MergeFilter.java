@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * this class is used for testing image applying merge filter
+ * @author liulu
+ *
+ */
 class Test_MergeFilter {
 
 
@@ -17,13 +21,12 @@ class Test_MergeFilter {
 		mf = new MergeFilter();
 		try {
 			//create image
-			
 			BufferedImage img = ImageIO.read(new File("example.jpg"));
 			int width = img.getWidth();
 			int height = img.getHeight();
-			
+			//create tool image for merging with
 			BufferedImage toolImg = ImageIO.read(new File("Example_Merge.jpg"));
-
+            
 			int p = img.getRGB(0, 0);
 			int r = (p>>16)&0xff;
 			int g = (p>>8)&0xff;
@@ -42,6 +45,7 @@ class Test_MergeFilter {
 			int g2 = (p2>>8)&0xff;
 			int b2 = p2&0xff;
 			boolean value = false;
+			//check whether two image is being merged
 			if(avg1 < 50) {
 				if(r2 == (r + 200)/2) {
 					value = true;

@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * this class is used for testing image applying voronoi filter and then grey filter
+ * @author liulu
+ *
+ */
 class Test_VoronoiFilterAndGreyFilter {
 	
 private VoronoiFilter vf;
@@ -34,7 +38,7 @@ void test() {
 	    int cells = vf.cells;
 	    int n = 0;
 	  
-	    
+	    //check whether image is being applied by voronoi filter and turned to grey
 	    for(int i = 0; i < cells; i ++) {
 	    	if(distance(10, px[i], 10, py[i]) < distance(10, px[n], 10, py[n])) {
 	    			n = i;

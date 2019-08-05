@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * this is used for testing image applying scale filter and then voronoi filter
+ * @author liulu
+ *
+ */
 class Test_VoronoiFilterScale {
 
 	private VoronoiFilter vf;
@@ -17,7 +21,9 @@ class Test_VoronoiFilterScale {
 		try {
 			//create image
 			BufferedImage img = ImageIO.read(new File("example.jpg"));
+			//scale image to fit frame
 			Scale s = new Scale();
+			//apply voronoi filter
 			BufferedImage processImage = s.FitImagetoFrame(img, 500, 500);
 			processImage = vf.processImage(processImage);
 			boolean value = false;
@@ -29,14 +35,12 @@ class Test_VoronoiFilterScale {
 		    int[] color = vf.color;
 		    int cells = vf.cells;
 		    int n = 0;
-		    
+		    //check whether image is scaled to right size and applied with voronoi filter
 		    for(int i = 0; i < cells; i ++) {
 		    	if(distance(10, px[i], 10, py[i]) < distance(10, px[n], 10, py[n])) {
 		    			n = i;
 		    	}
 		    }
-		    
-		    
 			int p2 = processImage.getRGB(10, 10);
 			if (width > height) {
 				if (processImage.getWidth() == 500 && p2 == color[n]) {

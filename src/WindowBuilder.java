@@ -172,7 +172,7 @@ public class WindowBuilder {
 	    list.setBounds(345, 433, 118, 88);
 	    frame.getContentPane().add(list);
         
-	    //if user click, it will add the "+" and "-" button, and adjust the contrast level based on "+" or "-"
+	    //if user click, it will add the "+" and "-" button, and adjust the brightness level based on "+" or "-"
 	    JButton brightnessBtn = new JButton("Brightness");
 	    brightnessBtn.setBounds(12, 498, 101, 23);
         frame.getContentPane().add(brightnessBtn);

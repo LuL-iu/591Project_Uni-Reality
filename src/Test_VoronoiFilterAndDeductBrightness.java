@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * testing image applying voronoi filter and then decrease brightness
+ * @author liulu
+ *
+ */
 class Test_VoronoiFilterAndDeductBrightness {
 
 	private VoronoiFilter vf;
@@ -19,13 +23,15 @@ class Test_VoronoiFilterAndDeductBrightness {
 		try {
 			//create image
 			BufferedImage img = ImageIO.read(new File("example.jpg"));
+			//apply voronoi filter
 			BufferedImage processImage = vf.processImage(img);
+			//decrease image brightness by 5
 			processImage = bf.processImageWithValue(processImage, -5);
 			
 			boolean value = false;	
 			int width = img.getWidth();
 			int height = img.getHeight();
-		
+			///check whether the image get the right rgb value after applying voronoi and decrease brightness
 			int p = img.getRGB(10, 10);
 
 		    int[] px = vf.px;

@@ -9,7 +9,11 @@ import javax.imageio.ImageIO;
 import org.junit.jupiter.api.Test;
 
 class Test_GreyFilterAndDeductBightness {
-
+	/**
+	 * this class is used for testing image applying grey filter and then  deduct image brightness
+	 * @author liulu
+	 *
+	 */
 	private Filter gf;
 	private Filter bf;
 	@Test
@@ -32,11 +36,13 @@ class Test_GreyFilterAndDeductBightness {
 			int r = (p>>16)&0xff;
 			int g = (p>>8)&0xff;
 			int b = p&0xff;
+			//deduct brightness by 5 through brightness filter
 			processImage = ((BrightnessFilter) bf).processImageWithValue(processImage, -5);
 			int p2 = processImage.getRGB(x,y);
 			int r2 = (p2>>16)&0xff;
 			int g2 = (p2>>8)&0xff;
 			int b2 = p2&0xff;
+			//check whether r2 = g2 = b2 and r2 is decreased by 5 
 			if(r2 ==  g2 && r2 == b2 && r2 == r-5 ) {
 				value = true;
 			}

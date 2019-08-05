@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * this class is used for testing image applying grey filter and then scale filter
+ * @author liulu
+ *
+ */
 class Test_GreyFilterScale {
 	private Filter gf;
 	private Scale s;
