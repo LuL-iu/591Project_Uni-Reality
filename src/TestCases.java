@@ -708,9 +708,10 @@ class TestCases {
 			int r3 = (p3>>16)&0xff;
 			int g3 = (p3>>8)&0xff;
 			int b3 = p3&0xff;
-			if( r2 == r3 - 5) {
+			if( r2 < r3) {
 				value = true;
 			}
+
 			assertEquals(true, value);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
