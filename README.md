@@ -28,7 +28,24 @@ List of features ready
 * Save file to folder
 
 ## Example
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/Screen%20Shot%202019-08-04%20at%206.48.57%20PM.png)
+
+### Add Image 
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%201.JPG)
+
+### VorFilter
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%202.JPG)
+
+### MergeFilter
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%203.JPG)
+
+### ContrastFilter
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%204.JPG)
+
+### AdjustHue
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%205.JPG)
+
+### AddEmoji
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%206.JPG)
 
 
 ## Limitation
