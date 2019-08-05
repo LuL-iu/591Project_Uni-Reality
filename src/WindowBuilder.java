@@ -58,6 +58,7 @@ public class WindowBuilder {
     private JButton plus, minus;
 	private JButton btnAdd;
 	private JButton btnGrey;
+	private JButton btnMerge;
 	private String filePath;
 	private BufferedImage originImage;
 	private BufferedImage processImage;
@@ -247,7 +248,6 @@ public class WindowBuilder {
 		while (i == 0){
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File f = fc.getSelectedFile();
-	            filePath = f.getPath();
 	            i = 1;
 	            return f;
 			}
@@ -288,7 +288,7 @@ public class WindowBuilder {
     	}
 	}
 	
-	//it apply the merge filter to process image and display on screen
+	//it will ask user to choose another image and apply two images with merge filter to process image and display on screen
 	public class MergeBtnListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -296,11 +296,18 @@ public class WindowBuilder {
 				System.out.println("Please select a image first.");
 				return;
 			}
-			Filter Merge = new MergeFilter();
-			BufferedImage MergeImage = Merge.processImage(processImage);
-			processImage = MergeImage;
-			AddImage(MergeImage);
-			
+			File f = createFileChooser(btnMerge);
+			BufferedImage toolImage;
+			try {
+				toolImage = ImageIO.read(f);
+				MergeFilter Merge = new MergeFilter();
+				BufferedImage MergeImage = Merge.MergeImage(processImage, toolImage);
+				processImage = MergeImage;
+				AddImage(MergeImage);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -308,6 +315,7 @@ public class WindowBuilder {
 	public class chooseBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
     		File f =  createFileChooser(btnAdd);
+    		filePath = f.getPath();
     		if(f == null) {
     			return;
     		}
