@@ -20,7 +20,7 @@ Everyone has their own imagination about the world. One picture or video with th
 ## Features
 List of features ready 
 * Select photo locally 
-* Adjust contrast
+* Adjust brightness
 * Adjust photo hue
 * Add Emoji
 * Add Voronnoi filter 
@@ -38,7 +38,7 @@ List of features ready
 ### MergeFilter
 ![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process2.JPG)
 
-### ContrastFilter
+### BrightnessFilter
 ![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process3.JPG)
 
 ### AdjustHue
