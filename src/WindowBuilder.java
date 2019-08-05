@@ -41,8 +41,8 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 
 /**
- * this is a window interaction class, it read user input, add image, display image, clear image, apply filter and add emoji, rotate/scale emoji, scale/rotate emoji
- * @author liulu
+ * this is a window interaction class, it read user input, add image, display image, clear image, apply filter and add emoji
+ * 
  *
  */
 public class WindowBuilder {
@@ -51,7 +51,6 @@ public class WindowBuilder {
 	public JFrame getFrame() {
 		return frame;
 	}
-
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
@@ -59,6 +58,7 @@ public class WindowBuilder {
     private JButton plus, minus;
 	private JButton btnAdd;
 	private JButton btnGrey;
+	private JButton btnMerge;
 	private String filePath;
 	private BufferedImage originImage;
 	private BufferedImage processImage;
@@ -71,7 +71,7 @@ public class WindowBuilder {
 	JButton openButton, saveButton;
 	private JFileChooser fc;
     private Integer initial = 1;
-    private Integer saturation = 5;
+    private Integer hue = 5;
 
     
 	/**
@@ -137,49 +137,57 @@ public class WindowBuilder {
 	    frame.getContentPane().add(btnGrey);  
 	    btnGrey.addActionListener(new GreyBtnListener());
 	    
+	    //Add Merge Filter, if user click, image merge the default image and dispaly on canvas
 	    JButton btnMerge = new JButton("MergeFilter");
 	    btnMerge.setBounds(123, 464, 101, 23);
 	    frame.getContentPane().add(btnMerge);
 	    btnMerge.addActionListener(new MergeBtnListener());
 	    
-	    
-	    JButton btnVoronoi = new JButton("VoronoiFilter");
+	    //Add Voronoi Filter, if user click, image apply voronoi filter generate voronoi grid and paint the diagram with original image
+	    JButton btnVoronoi = new JButton("VorFilter");
 	    btnVoronoi.setBounds(12, 464, 101, 23);
 	    frame.getContentPane().add(btnVoronoi);
 	    btnVoronoi.addActionListener(new VoronoiBtnLisener());
 	    
+	    //if user click the save btn, it saved the process image to the project folder
 	    JButton btnSaveImage = new JButton("Save Image");
 	    btnSaveImage.setBounds(123, 430, 101, 23);
 	    frame.getContentPane().add(btnSaveImage);
 	    btnSaveImage.addActionListener(new saveBthListener());
 	    
+	    //if user choose the emoji from the list and then click add emoji, it will add the emoji from the source library and display infront of original image
 	    JButton btnAddEmoji = new JButton("Add Emoji");
 	    btnAddEmoji.setBounds(473, 498, 101, 23);
 	    frame.getContentPane().add(btnAddEmoji);
 	    btnAddEmoji.addActionListener(new emojiListener());
-
-	    String[] emojiName = new String[5];
+        
+	    //create an emoji list name and display on the Jlist 
+	    String[] emojiName = new String[3];
 	    emojiName[0] = "angry";
 	    emojiName[1] = "heart";
 	    emojiName[2] = "comfort";
 	    list = new JList(emojiName);
 	    list.setBounds(345, 433, 118, 88);
 	    frame.getContentPane().add(list);
-
+        
+	    //if user click, it will add the "+" and "-" button, and adjust the contrast level based on "+" or "-"
 	    JButton contrastBtn = new JButton("Contrast");
         contrastBtn.setBounds(12, 498, 101, 23);
         frame.getContentPane().add(contrastBtn);
         contrastBtn.addActionListener(contrastListener);
-
-        JButton saturation = new JButton("Adjust Hue");
-        saturation.setBounds(123, 498, 101, 23);
-        frame.getContentPane().add(saturation);
         
+        //if user click, it will call the hue filter and adjust the hue level 
+        JButton HueBtn = new JButton("Adjust Hue");
+        HueBtn.setBounds(123, 498, 101, 23);
+        frame.getContentPane().add(HueBtn);
+        HueBtn.addActionListener(hueListener); 
+        
+        //instruction for add emoji
         JLabel lblSelectEmojiFrom = new JLabel("Select Emoji from the list, then click add emoji");
         lblSelectEmojiFrom.setHorizontalAlignment(SwingConstants.LEFT);
-        lblSelectEmojiFrom.setBounds(297, 527, 277, 23);
+        lblSelectEmojiFrom.setBounds(249, 527, 325, 23);
         frame.getContentPane().add(lblSelectEmojiFrom);
-        saturation.addActionListener(saturationListener);    
+     
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
@@ -200,7 +208,7 @@ public class WindowBuilder {
 	}
 	
 
-	
+	//emojiListener if will add the emoji user selected from the list 
 	public class emojiListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			ImagePanel.removeAll();
@@ -228,24 +236,30 @@ public class WindowBuilder {
 		}
 	}
 	
+	//it return the file that user select from file explore
 	public File createFileChooser(JButton a){
 		int i = 0;
 		JFileChooser fc = new JFileChooser();
+		//apply the image filter, only show image in the file explore
 	    fc.addChoosableFileFilter(new ImageFilter());
         fc.setAcceptAllFileFilterUsed(false);
 		int returnVal = fc.showOpenDialog(a);
+		//wait for user to choose, get the return file from chooser 
 		while (i == 0){
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 	            File f = fc.getSelectedFile();
-	            filePath = f.getPath();
 	            i = 1;
 	            return f;
+			}
+			else {
+				return null;
 			}
 		}
 		return null;
 		
 	}
 	
+
 	public class VoronoiBtnLisener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(!add) {
@@ -259,7 +273,8 @@ public class WindowBuilder {
     		AddImage(vorImage);
 		}
 	}
-	
+			
+	//it apply the grey filter to process image and display on screen
 	public class GreyBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(!add) {
@@ -273,6 +288,7 @@ public class WindowBuilder {
     	}
 	}
 	
+	//it will ask user to choose another image and apply two images with merge filter to process image and display on screen
 	public class MergeBtnListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -280,22 +296,36 @@ public class WindowBuilder {
 				System.out.println("Please select a image first.");
 				return;
 			}
-			
-			// TODO Auto-generated method stub
-			Filter Merge = new MergeFilter();
-			BufferedImage MergeImage = Merge.processImage(processImage);
-			processImage = MergeImage;
-			AddImage(MergeImage);
-			
+			File f = createFileChooser(btnMerge);
+			BufferedImage toolImage;
+			try {
+				if (f == null) {
+					return;
+				}
+				toolImage = ImageIO.read(f);
+				MergeFilter Merge = new MergeFilter();
+				BufferedImage MergeImage = Merge.MergeImage(processImage, toolImage);
+				processImage = MergeImage;
+				AddImage(MergeImage);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
+	////it call the file choose function and add the choosen image to screen
 	public class chooseBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
     		File f =  createFileChooser(btnAdd);
+    		filePath = f.getPath();
+    		if(f == null) {
+    			return;
+    		}
     		fileName = f.getName();
 			try {
 				originImage = (BufferedImage)ImageIO.read(f);
+				//scale original image to fit to screen
 				Scale s = new Scale();
 				originImage = s.FitImagetoFrame(originImage, w, h);
 				processImage = originImage;
@@ -308,8 +338,12 @@ public class WindowBuilder {
     	}
 	}
 	
+	//it will return the image to the original status
 	public class clearBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if(filePath == null) {
+				return;
+			}
 			File f = new File(filePath);
 			try {
 				originImage = ImageIO.read(f);
@@ -324,6 +358,11 @@ public class WindowBuilder {
     	}
 	}
 	
+	/**
+	 * it save the process image to project folder
+	 * 
+	 *
+	 */
 	public class saveBthListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(!add) {
@@ -335,53 +374,63 @@ public class WindowBuilder {
 				ImageIO.write(processImage, "jpg", output);
 				System.out.println("image save sucessfull!");
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
 	}
+	
+	/**
+	 * user click, it will add 5 contrast level  to process image and display process image
+	 */
 	 private ActionListener addContrast = (event) -> {
-	        ContrastFilter contrastFilter = new ContrastFilter();
-	        if (originImage == null) {
-	            return;
-	        }
-	        BufferedImage contrastImage = contrastFilter.processImageWithValue(processImage, initial);
-	        AddImage(contrastImage);
-	        initial += 5;
-	    };
+        ContrastFilter contrastFilter = new ContrastFilter();
+        if (originImage == null) {
+            return;
+        }
+        processImage = contrastFilter.processImageWithValue(processImage, initial);
+        AddImage(processImage);
+        initial += 5;
+	};
+	    
+	/**
+	 * user click, it will minus 5 contrast level  to process image and display process image
+	 */
+    private ActionListener minusContrast = (event) -> {
+        ContrastFilter contrastFilter = new ContrastFilter();
+        if (originImage == null) {
+            return;
+        }
+        processImage = contrastFilter.processImageWithValue(processImage, initial);
+        AddImage(processImage);
+        initial -= 5;
+    };
+   
+    /**
+     * if user click, it will add 5 hue level to process image and display the process image
+     */
+    private ActionListener hueListener = (event) -> {
+        SaturationFilter contrastFilter = new SaturationFilter();
+        if (originImage == null) {
+            return;
+        }
+        processImage = contrastFilter.processImageWithValue(processImage, hue);
+        AddImage(processImage);
+        hue +=5;
+    };
+    
+    /**
+     *if user click, it will display "+" and "-" button 
+     */
+    private ActionListener contrastListener = (event) -> {
+        plus = new JButton("+");
+        plus.addActionListener(minusContrast);
+        plus.setBounds(5, 10, 50, 50);
+        frame.getContentPane().add(plus);
 
-	    private ActionListener minusContrast = (event) -> {
-	        ContrastFilter contrastFilter = new ContrastFilter();
-	        if (originImage == null) {
-	            return;
-	        }
-	        BufferedImage contrastImage = contrastFilter.processImageWithValue(processImage, initial);
-	        AddImage(contrastImage);
-	        initial -= 5;
-	    };
-
-	    private ActionListener saturationListener = (event) -> {
-	        SaturationFilter contrastFilter = new SaturationFilter();
-	        if (originImage == null) {
-	            return;
-	        }
-	        BufferedImage Img = contrastFilter.processImageWithValue(processImage, saturation);
-	        AddImage(Img);
-	        saturation +=5;
-	    };
-
-	    private ActionListener contrastListener = (event) -> {
-	        plus = new JButton("+");
-	        // if user click, it reads the file name information from JTextField
-	        plus.addActionListener(minusContrast);
-	        plus.setBounds(5, 10, 50, 50);
-	        frame.getContentPane().add(plus);
-
-	        minus = new JButton("-");
-	        // if user click, it reads the file name information from JTextField
-	        minus.addActionListener(addContrast);
-	        minus.setBounds(5, 70, 50, 50);
-	        frame.getContentPane().add(minus);
-	        frame.repaint();
-	    };
+        minus = new JButton("-");
+        minus.addActionListener(addContrast);
+        minus.setBounds(5, 70, 50, 50);
+        frame.getContentPane().add(minus);
+        frame.repaint();
+    };
 }

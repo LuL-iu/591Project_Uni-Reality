@@ -3,7 +3,9 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 
-/* ImageFilter.java is used by FileChooserDemo2.java. */
+/**ImageFilter.java is used by FileChooser method in windowbuider
+ * 
+ **/
 public class ImageFilter extends FileFilter {
 
     //Accept all directories and all gif, jpg, tiff, or png files.

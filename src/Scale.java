@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 /**
  * This program demonstrates how to resize an image.
  *
- * @author www.codejava.net
+ * 
  *
  */
 public class Scale {
@@ -45,7 +45,13 @@ public class Scale {
         BufferedImage outputImage = resize(img, scaledWidth, scaledHeight);
         return outputImage; 
     }
- 
+    /**
+     * resize an image to fit the frame
+     * @param img
+     * @param frameW
+     * @param frameH
+     * @return
+     */
     public BufferedImage FitImagetoFrame(BufferedImage img, int frameW, int frameH) {
     	int w = img.getWidth();
     	int h = img.getHeight();
@@ -55,7 +61,13 @@ public class Scale {
     	BufferedImage outputImage = resizeByPercent(img, Ratio);
     	return outputImage;
     }
-    
+    /**
+     * resize the image to full fill the frame
+     * @param img
+     * @param frameW
+     * @param frameH
+     * @return
+     */
     public BufferedImage resizeToOneSide(BufferedImage img, int frameW, int frameH) {
     	int w = img.getWidth();
     	int h = img.getHeight();
