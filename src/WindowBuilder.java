@@ -17,9 +17,11 @@ import javax.swing.JFileChooser;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JTextArea;
 
@@ -72,6 +74,7 @@ public class WindowBuilder {
 	private JFileChooser fc;
     private Integer initial = 1;
     private Integer hue = 5;
+    private String selectEmoji;
 
     
 	/**
@@ -217,6 +220,7 @@ public class WindowBuilder {
 				return;
 			}
 			String path = list.getSelectedValue() + ".gif";
+			selectEmoji = list.getSelectedValue();
 			URL url = this.getClass().getResource(path);
 			Icon myImgIcon = new ImageIcon(url);
 			JLabel imageLbl = new JLabel(myImgIcon);
@@ -369,11 +373,12 @@ public class WindowBuilder {
 				System.out.println("Please select a image first.");
 				return;
 			}
+			String outputName = fileName.split("\\.")[0];
 			File output = new File("Modified" + fileName);
 			try {
 				ImageIO.write(processImage, "jpg", output);
 				System.out.println("image save sucessfull!");
-			} catch (IOException e1) {
+		    } catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
