@@ -1,0 +1,25 @@
+This project is designed for editing image, user can create unique image with different filter and add emoji to image. 
+
+Function Description:
+1.Add Image
+Add Image from file explore, display the dialogue and let user choose, scale the image porportionly to fit on screen and display the choosen image to screen
+
+2.Voronoi Filter
+Generate Voronoi digram and paint with original Image, generate abstract image and display on screen\
+
+3.Merge Filter
+It can merge two image together, user can create unique image by chooseing unique merge image
+
+4.Grey Filter
+It will turn Image to grey.
+
+5.Adjust Contrast
+User can adjust the image contrast by clicking "contrast" and "+"/"-" button
+
+6.Adjust Hue
+It will increase the hue value of the image 
+
+7.Add Emoji
+It can display animated emoji on screen, user can choose emoji from the list on screen  
+
+Create your own unique image now!
