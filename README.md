@@ -45,7 +45,7 @@ List of features ready
 ![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%205.JPG)
 
 ### AddEmoji
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%206.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%207.JPG)
 
 
 ## Limitation
