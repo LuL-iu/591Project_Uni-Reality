@@ -1,3 +1,7 @@
+Name: Uni-Reality
+Team: Lu Liu, Yixuan Chen
+
+Description:
 This project is designed for editing image, user can create unique image with different filter and add emoji to image. 
 
 Function Description:
@@ -13,8 +17,8 @@ It can merge two image together, user can create unique image by chooseing uniqu
 4.Grey Filter
 It will turn Image to grey.
 
-5.Adjust Contrast
-User can adjust the image contrast by clicking "contrast" and "+"/"-" button
+5.Adjust Brightness
+User can adjust the image brightness by clicking "contrast" and "+"/"-" button
 
 6.Adjust Hue
 It will increase the hue value of the image 
@@ -23,3 +27,17 @@ It will increase the hue value of the image
 It can display animated emoji on screen, user can choose emoji from the list on screen  
 
 Create your own unique image now!
+
+Job Assignment:
+Lu:
+CRC Card
+User Interface
+Filter Classes, Emoji, Add & Save Image
+Summary
+Test Case
+
+Yixuan:
+CRC Card
+User Interface
+Filter Classes
+Read Me

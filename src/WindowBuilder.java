@@ -17,9 +17,11 @@ import javax.swing.JFileChooser;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JTextArea;
 
@@ -55,14 +57,14 @@ public class WindowBuilder {
 		this.frame = frame;
 	}
 	private Panel ImagePanel;
-    private JButton plus, minus;
-	private JButton btnAdd;
-	private JButton btnGrey;
-	private JButton btnMerge;
+    JButton plus, minus;
+	JButton btnAdd;
+	JButton btnGrey;
+	JButton btnMerge;
 	private String filePath;
 	private BufferedImage originImage;
 	private BufferedImage processImage;
-	private JButton btnClear;
+	JButton btnClear;
 	private int w;
 	private int h;
 	private String fileName;
@@ -70,8 +72,8 @@ public class WindowBuilder {
 	private boolean add = false;
 	JButton openButton, saveButton;
 	private JFileChooser fc;
-    private Integer initial = 1;
     private Integer hue = 5;
+    private String selectEmoji;
 
     
 	/**
@@ -170,11 +172,11 @@ public class WindowBuilder {
 	    list.setBounds(345, 433, 118, 88);
 	    frame.getContentPane().add(list);
         
-	    //if user click, it will add the "+" and "-" button, and adjust the contrast level based on "+" or "-"
-	    JButton contrastBtn = new JButton("Contrast");
-        contrastBtn.setBounds(12, 498, 101, 23);
-        frame.getContentPane().add(contrastBtn);
-        contrastBtn.addActionListener(contrastListener);
+	    //if user click, it will add the "+" and "-" button, and adjust the brightness level based on "+" or "-"
+	    JButton brightnessBtn = new JButton("Brightness");
+	    brightnessBtn.setBounds(12, 498, 101, 23);
+        frame.getContentPane().add(brightnessBtn);
+        brightnessBtn.addActionListener(brightnessListener);
         
         //if user click, it will call the hue filter and adjust the hue level 
         JButton HueBtn = new JButton("Adjust Hue");
@@ -217,6 +219,7 @@ public class WindowBuilder {
 				return;
 			}
 			String path = list.getSelectedValue() + ".gif";
+			selectEmoji = list.getSelectedValue();
 			URL url = this.getClass().getResource(path);
 			Icon myImgIcon = new ImageIcon(url);
 			JLabel imageLbl = new JLabel(myImgIcon);
@@ -318,10 +321,10 @@ public class WindowBuilder {
 	public class chooseBtnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
     		File f =  createFileChooser(btnAdd);
-    		filePath = f.getPath();
     		if(f == null) {
     			return;
     		}
+    		filePath = f.getPath();
     		fileName = f.getName();
 			try {
 				originImage = (BufferedImage)ImageIO.read(f);
@@ -369,47 +372,46 @@ public class WindowBuilder {
 				System.out.println("Please select a image first.");
 				return;
 			}
+			String outputName = fileName.split("\\.")[0];
 			File output = new File("Modified" + fileName);
 			try {
 				ImageIO.write(processImage, "jpg", output);
 				System.out.println("image save sucessfull!");
-			} catch (IOException e1) {
+		    } catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		}
 	}
 	
 	/**
-	 * user click, it will add 5 contrast level  to process image and display process image
+	 * user click, it will add 5 brightness level  to process image and display process image
 	 */
-	 private ActionListener addContrast = (event) -> {
-        ContrastFilter contrastFilter = new ContrastFilter();
+	 private ActionListener addBrightness = (event) -> {
+        BrightnessFilter BrightnessFilter = new BrightnessFilter();
         if (originImage == null) {
             return;
         }
-        processImage = contrastFilter.processImageWithValue(processImage, initial);
+        processImage = BrightnessFilter.processImageWithValue(processImage,5);
         AddImage(processImage);
-        initial += 5;
 	};
 	    
 	/**
-	 * user click, it will minus 5 contrast level  to process image and display process image
+	 * user click, it will minus 5 brightness level  to process image and display process image
 	 */
-    private ActionListener minusContrast = (event) -> {
-        ContrastFilter contrastFilter = new ContrastFilter();
+    private ActionListener minusBrightness = (event) -> {
+    	BrightnessFilter BrightnessFilter = new BrightnessFilter();
         if (originImage == null) {
             return;
         }
-        processImage = contrastFilter.processImageWithValue(processImage, initial);
+        processImage = BrightnessFilter.processImageWithValue(processImage, -5);
         AddImage(processImage);
-        initial -= 5;
     };
    
     /**
      * if user click, it will add 5 hue level to process image and display the process image
      */
     private ActionListener hueListener = (event) -> {
-        SaturationFilter contrastFilter = new SaturationFilter();
+        HueFilter contrastFilter = new HueFilter();
         if (originImage == null) {
             return;
         }
@@ -421,14 +423,14 @@ public class WindowBuilder {
     /**
      *if user click, it will display "+" and "-" button 
      */
-    private ActionListener contrastListener = (event) -> {
+    private ActionListener brightnessListener = (event) -> {
         plus = new JButton("+");
-        plus.addActionListener(minusContrast);
+        plus.addActionListener(addBrightness);
         plus.setBounds(5, 10, 50, 50);
         frame.getContentPane().add(plus);
 
         minus = new JButton("-");
-        minus.addActionListener(addContrast);
+        minus.addActionListener(minusBrightness);
         minus.setBounds(5, 70, 50, 50);
         frame.getContentPane().add(minus);
         frame.repaint();

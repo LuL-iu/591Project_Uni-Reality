@@ -20,7 +20,7 @@ Everyone has their own imagination about the world. One picture or video with th
 ## Features
 List of features ready 
 * Select photo locally 
-* Adjust contrast
+* Adjust brightness
 * Adjust photo hue
 * Add Emoji
 * Add Voronnoi filter 
@@ -30,22 +30,25 @@ List of features ready
 ## Example
 
 ### Add Image 
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%201.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process0.JPG)
 
 ### VorFilter
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%202.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process1.JPG)
 
 ### MergeFilter
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%203.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process2.JPG)
 
-### ContrastFilter
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%204.JPG)
+### BrightnessFilter
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process3.JPG)
 
 ### AdjustHue
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%205.JPG)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process4.JPG)
 
-### AddEmoji
-![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process%206.JPG)
+### GreyFilter
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process5.JPG)
+
+### AddEmoji(GIF)
+![Image description](https://github.com/cit-591/final-project-summer-2019-lu-yixuan/blob/master/process6.JPG)
 
 
 ## Limitation
